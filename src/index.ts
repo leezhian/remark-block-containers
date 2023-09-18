@@ -87,7 +87,7 @@ function createContainer(type: string, props: NodeData, children: Array<RootCont
  */
 function createTabs(nodes: RootContent[]): any {
   const groupName = `group-${nanoid(5)}`
-  let codeIndex = 0
+  let checked = 'checked'
 
   const tabs = nodes.reduce<Array<RootContent>>((ns, node) => {
     if (node.type !== 'code') return ns
@@ -112,13 +112,12 @@ function createTabs(nodes: RootContent[]): any {
           type: 'radio',
           id: `tab-${id}`,
           name: groupName,
-          checked: codeIndex === 0 ? 'checked' : '',
-          onChange: () => { console.log('123') }
+          checked,
         },
       },
     })
 
-    codeIndex++
+    checked = ''
     return ns
   }, [])
 
@@ -139,14 +138,15 @@ function createTabs(nodes: RootContent[]): any {
  * @param {RootContent[]} nodes
  * @return {RootContent[]}
  */
-function transformCodes(nodes: RootContent[]): RootContent[] {
-  let codeIndex = 0
-  const res = nodes.map((node) => {
+function transformCodes(nodes: RootContent[]): any[] {
+  let checked = 'checked'
+  const blockChildren = nodes.map(node => {
     if (node.type !== 'code') return node
 
     const lang = node.lang ?? ''
-    const classNames = codeIndex === 0 ? [`language-${lang}`, 'active'] : [`language-${lang}`]
-    codeIndex++
+    const classNames = checked ? [`language-${lang}`, 'active'] : [`language-${lang}`]
+    checked = ''
+
     return {
       type: 'container',
       children: [node],
@@ -156,10 +156,21 @@ function transformCodes(nodes: RootContent[]): RootContent[] {
           className: classNames,
         },
       },
-    } as any
+    }
   })
 
-  return res
+  return [
+    {
+      type: 'container',
+      children: blockChildren,
+      data: {
+        hName: 'div',
+        hProperties: {
+          className: ['blocks'],
+        },
+      },
+    },
+  ]
 }
 
 /**

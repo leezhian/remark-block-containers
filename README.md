@@ -50,9 +50,17 @@ pnpm add remark-block-containers
 ```
 
 > `info`、`tip`、`warning`、`danger`、`details`、`code-group` 等 type 都是内置便捷写法，等价于 `::: div{.tip}`。
-> 若想要添加自定义id，则 `::: div{#id}` 即可。
+>
+> 若想要添加**自定义id**，则 `::: div{#id}` 即可。
+>
+> 因此你想要自定义任何容器也是允许的，**前提 `type` 是合法标签类型**，如 `div`、`main`、`span` 等。
 
-因此你想要自定义任何容器也是允许的，前提 `type` 是合法标签类型，如 `div`、`main`、`span` 等。
+**使用 `code-group` 时**，单一引用该插件的是不行的，无法实现切换逻辑，因此需要在恰当的位置，**引入 `useCodeGroups.js` 并执行 `useCodeGroups` 方法**，监听代码组 `tab` 点击实现切换逻辑。
+
+```javascript
+import { useCodeGroups } from 'remarkBlockContainers/useCodeGroups'
+useCodeGroups()
+```
 
 ## 选项
 
