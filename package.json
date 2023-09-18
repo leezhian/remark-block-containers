@@ -1,6 +1,6 @@
 {
   "name": "remark-block-containers",
-  "version": "1.0.0",
+  "version": "1.0.0-beta",
   "description": "remark 插件-用于创建自定义容器，允许添加标题、id或样式类",
   "type": "module",
   "main": "./dist/index.js",
@@ -8,7 +8,9 @@
   "exports": "./dist/index.js",
   "scripts": {
     "prebuild": "rm -rf dist",
-    "build": "npm run prebuild && tsc"
+    "build": "npm run prebuild && tsc",
+    "lint": "tsc --noEmit && eslint 'src/**' --ext .js,ts",
+    "lint-fix": "npm run lint -- --fix"
   },
   "repository": {
     "type": "git",
@@ -34,7 +36,6 @@
   "author": "kim",
   "license": "MIT",
   "dependencies": {
-    "mdast": "^3.0.0",
     "nanoid": "^5.0.1",
     "unist-util-find-after": "^5.0.0",
     "unist-util-find-between-all": "^1.0.4",
@@ -42,6 +43,12 @@
   },
   "devDependencies": {
     "@types/mdast": "^4.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.7.0",
+    "@typescript-eslint/parser": "^6.7.0",
+    "eslint": "^8.49.0",
+    "eslint-config-prettier": "^9.0.0",
+    "mdast": "^3.0.0",
+    "prettier": "^3.0.3",
     "unified": "^11.0.3"
   }
 }

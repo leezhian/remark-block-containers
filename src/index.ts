@@ -223,10 +223,10 @@ function findClosingNode(parent: Parent, node: Paragraph): Paragraph | undefined
  * @return {object}
  */
 function analyzeParamsString(paramsStr: string): Params {
-  let title
+  let title = undefined
   let type = settings.containerType
   let alias = '' // 别名
-  let props: NodeData = {
+  const props: NodeData = {
     className: [],
   }
   if (!paramsStr) {

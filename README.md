@@ -1,6 +1,12 @@
 # remark-block-containers
 
+[![Version](https://img.shields.io/npm/v/remark-block-containers?style=flat&colorA=000000&colorB=000000)](https://www.npmjs.com/package/remark-block-containers)
+[![Downloads](https://img.shields.io/npm/dt/remark-block-containers.svg?style=flat&colorA=000000&colorB=000000)](https://www.npmjs.com/package/remark-block-containers)
+[![Build Size](https://img.shields.io/bundlephobia/minzip/remark-block-containers?label=bundle%20size&style=flat&colorA=000000&colorB=000000)](https://bundlephobia.com/result?p=remark-block-containers)
+
+
 这是一个 remark 插件，用于创建自定义容器，允许添加标题、id或样式类。
+*目前仍处于beta版本*
 
 ## 什么时候应该使用？
 
