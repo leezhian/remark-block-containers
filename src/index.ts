@@ -36,7 +36,8 @@ const settings: BlockContainersOptions = {
 const TAGS_ALIAS = ['info', 'tip', 'warning', 'danger', 'code-group'] // 标签别名
 
 export const PARAM_REG = /([A-Za-z0-9_-]+)(\{([\.|#])(\w+)\})?/iu
-export const CONTAINER_END = /\s*\n*?:::$/
+export const CONTAINER_START = /^:{3}\s*([A-Za-z0-9_-]+)?(\{([\.|#])(\w+)\})?(\s.+)?/i
+export const CONTAINER_END = /\s*\n*?:{3}$/
 export const BAD_CONTAINER_REG = /^(:{3})\s*\n+\s*(:{3})\s*.*/
 
 /**
@@ -186,8 +187,12 @@ function checkIsContainer(node: Paragraph): boolean {
   if (BAD_CONTAINER_REG.test(value)) return false
 
   const hasClosing = checkIsCompleteContainerStr(node)
-  if (!value.startsWith(':::')) return false
-  return !hasClosing || (hasClosing && value.includes('\n'))
+
+  if( hasClosing && CONTAINER_START.test(value)) {
+    return value.includes('\n')
+  } else {
+    return hasClosing || CONTAINER_START.test(value)
+  }
 }
 
 /**
@@ -197,7 +202,8 @@ function checkIsContainer(node: Paragraph): boolean {
  */
 function checkIsCompleteContainerStr(node: Paragraph) {
   const firstChildren = node.children[0] as Text
-  return firstChildren.value.endsWith(':::')
+  const clolonCount = firstChildren.value.match(/:/g)?.length ?? 0
+  return CONTAINER_END.test(firstChildren.value) && clolonCount >= 6
 }
 
 /**
@@ -223,7 +229,7 @@ function findClosingNode(parent: Parent, node: Paragraph): Paragraph | undefined
  * @return {object}
  */
 function analyzeParamsString(paramsStr: string): Params {
-  let title = undefined
+  let title: string | undefined = undefined
   let type = settings.containerType
   let alias = '' // 别名
   const props: NodeData = {
@@ -239,7 +245,9 @@ function analyzeParamsString(paramsStr: string): Params {
   }
 
   // 表示有参数
-  const [typeAndProp, ...titleArr] = paramsStr.split(' ')
+  const params = paramsStr.split(' ')
+  const typeAndProp = params.shift() ?? ''
+  // const [typeAndProp, ...titleArr] = paramsStr.split(' ')
   const match = typeAndProp.match(PARAM_REG)
   if (match && match[1]) {
     const lowerCaseType = match[1].toLowerCase()
@@ -260,7 +268,9 @@ function analyzeParamsString(paramsStr: string): Params {
     }
   }
 
-  title = titleArr.join(' ')
+  if(params.length) {
+    title = params.join(' ')
+  }
 
   return {
     title,

@@ -6,9 +6,8 @@
 
 
 这是一个 remark 插件，用于创建自定义容器，允许添加标题、id或样式类。
-*目前仍处于beta版本*
 
-## 什么时候应该使用？
+## ❓什么时候应该使用？
 
 如果您想要在 markdown 中添加自定义容器，例如生成警告、详情、危险、提示框等。
 
@@ -17,7 +16,7 @@
 - 允许自定义标签标题
 - 已内置 `info`、`tip`、`warning`、`danger`、`details`、`code-group` 便捷写法
 
-## 安装
+## 📦 安装
 
 该软件包仅适用于 ESM。建议 Nodejs 版本 14.14+
 
@@ -33,12 +32,12 @@ yarn add remark-block-containers
 pnpm add remark-block-containers
 ```
 
-## 用法
+## 📄 用法
 
 `::: [type][{id|class}] [title]`
 
 假设有如下 markdown 文件，`example.md` 它包含一个灵活的容器，类型为 tip。
-注意：每个容器必须以三个冒号开始和结束。
+注意：每个容器必须以三个冒号开始和结束；并且*两个相邻的容器中间必须有空行*。
 
 ```markdown
 ::: tip 提示
@@ -90,7 +89,17 @@ import { useCodeGroups } from 'remarkBlockContainers/useCodeGroups'
 useCodeGroups()
 ```
 
-## 选项
+### ❗ 注意事项
+
+目前存在一个问题，当容器只有空行时，会被误解析为非容器，因此尽量避免这种做法。
+
+```markdown
+:::
+
+:::
+```
+
+## ⚙️ 选项
 
 所有选项都是可选的。
 

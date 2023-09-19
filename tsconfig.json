@@ -8,7 +8,9 @@
     "strict": true,
     "declaration": true,
     "skipLibCheck": true,
-    "outDir": "dist"
+    "removeComments": true,
+    "outDir": "dist",
+    "types": ["jest"]
   },
   "include": ["src/**/*.ts"]
 }
