@@ -38,7 +38,7 @@ pnpm add remark-block-containers
 `::: [type][{id|class}] [title]`
 
 假设有如下 markdown 文件，`example.md` 它包含一个灵活的容器，类型为 tip。
-注意：每个容器必须已三个冒号开始和结束。
+注意：每个容器必须以三个冒号开始和结束。
 
 ```markdown
 ::: tip 提示
@@ -46,7 +46,29 @@ pnpm add remark-block-containers
 :::
 ```
 
-运行后会得到
+并且有一个 `example.js` 文件包含：
+
+```javascript
+import { unified } from 'unified'
+import { read } from 'to-vfile'
+import remarkParse from 'remark-parse'
+import remarkRehype from 'remark-rehype'
+import rehypeStringify from 'rehype-stringify'
+import rehypeFormat from 'rehype-format'
+import remarkBlockContainers from 'remark-block-containers'
+
+const file = await unified()
+  .use(remarkParse)
+  .use(remarkBlockContainers)
+  .use(remarkRehype)
+  .use(rehypeFormat)
+  .use(rehypeStringify)
+  .process(await read('example.md'))
+
+console.log(String(file))
+```
+
+运行后 `node example.js` 会得到👇
 
 ```html
 <div class="block-default tip">
