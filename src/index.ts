@@ -33,7 +33,7 @@ const settings: BlockContainersOptions = {
   titleClass: 'block-title',
 }
 
-const TAGS_ALIAS = ['info', 'tip', 'warning', 'danger', 'code-group'] // 标签别名
+const TAGS_ALIAS = ['info', 'tip', 'warning', 'danger', 'details', 'code-group'] // 标签别名
 
 export const PARAM_REG = /([A-Za-z0-9_-]+)(\{([\.|#])(\w+)\})?/iu
 export const CONTAINER_START = /^:{3}\s*([A-Za-z0-9_-]+)?(\{([\.|#])(\w+)\})?(\s.+)?/i
@@ -96,16 +96,6 @@ function createTabs(nodes: RootContent[]): any {
     const lang = node.lang ?? ''
     ns.push({
       type: 'paragraph',
-      children: [{ type: 'text', value: lang }],
-      data: {
-        hName: 'label',
-        hProperties: {
-          for: `tab-${id}`,
-        },
-      },
-    })
-    ns.push({
-      type: 'paragraph',
       children: [],
       data: {
         hName: 'input',
@@ -114,6 +104,16 @@ function createTabs(nodes: RootContent[]): any {
           id: `tab-${id}`,
           name: groupName,
           checked,
+        },
+      },
+    })
+    ns.push({
+      type: 'paragraph',
+      children: [{ type: 'text', value: lang }],
+      data: {
+        hName: 'label',
+        hProperties: {
+          for: `tab-${id}`,
         },
       },
     })
@@ -252,11 +252,13 @@ function analyzeParamsString(paramsStr: string): Params {
   if (match && match[1]) {
     const lowerCaseType = match[1].toLowerCase()
 
+    if(!TAGS_ALIAS.includes(lowerCaseType) || lowerCaseType === 'details') {
+      type = lowerCaseType
+    }
+
     if (TAGS_ALIAS.includes(lowerCaseType)) {
       alias = lowerCaseType
       props.className?.push(lowerCaseType)
-    } else {
-      type = lowerCaseType
     }
   }
 

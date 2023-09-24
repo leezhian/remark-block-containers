@@ -1,0 +1,125 @@
+:root {
+  --block-font-size: 14px;
+  --block-text-color: #333;
+  --block-info-bg: rgb(142 150 170 / 14%);
+  --block-tip-bg: rgb(100 108 255 / 14%);
+  --block-warning-bg: rgb(234 179 8 / 14%);
+  --block-danger-bg: rgb(244 63 94 / 14%);
+  --block-details-bg: rgb(142 150 170 / 14%);
+  --block-code-bg: rgb(36 41 46);
+  --block-code-tab-bg: rgb(36 41 46);
+  --block-code-tab-text-color: rgb(235 235 245 / 60%);
+}
+
+.block-default {
+  margin: 16px 0;
+  padding: 16px 16px 8px;
+  line-height: 24px;
+  color: var(--block-text-color);
+  font-size: var(--block-font-size);
+  border: 1px solid transparent;
+  border-radius: 8px;
+
+  p {
+    margin: 8px 0;
+  }
+
+  .block-title {
+    font-weight: 600;
+  }
+
+  &.info {
+    background-color: var(--block-info-bg);
+  }
+
+  &.tip {
+    background-color: var(--block-tip-bg);
+  }
+
+  &.warning {
+    background-color: var(--block-warning-bg);
+  }
+
+  &.danger {
+    background-color: var(--block-danger-bg);
+  }
+
+  &.details {
+    background-color: var(--block-details-bg);
+
+    summary {
+      margin-bottom: 8px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+  }
+}
+
+.code-group {
+  padding: 0;
+
+  .tabs {
+    position: relative;
+    display: flex;
+    padding: 0 12px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    background: var(--block-code-tab-bg);
+    border-radius: 8px 8px 0 0;
+
+    input {
+      position: fixed;
+      opacity: 0;
+      pointer-events: none;
+
+      &:checked + label {
+        color: rgb(249 249 249);
+
+        &::after {
+          background-color: rgb(255 255 255 / 60%);
+        }
+      }
+    }
+
+    label {
+      position: relative;
+      display: inline-block;
+      border-bottom: 1px solid transparent;
+      padding: 0 12px;
+      line-height: 48px;
+      font-weight: 500;
+      color: var(--block-code-tab-text-color);
+      white-space: nowrap;
+      cursor: pointer;
+      transition: color 0.25s;
+
+      &::after {
+        position: absolute;
+        right: 8px;
+        bottom: -1px;
+        left: 8px;
+        z-index: 1;
+        height: 2px;
+        border-radius: 2px;
+        content: '';
+        background-color: transparent;
+        transition: background-color 0.25s;
+      }
+    }
+  }
+
+  div[class*='language-'] {
+    display: none;
+    position: relative;
+    border-radius: 0 0 8px 8px;
+    background-color: var(--block-code-bg);
+
+    &.active {
+      display: block;
+    }
+  }
+
+  pre {
+    margin: 0;
+  }
+}
