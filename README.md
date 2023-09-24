@@ -85,8 +85,15 @@ console.log(String(file))
 **使用 `code-group` 时**，单一引用该插件的是不行的，无法实现切换逻辑，因此需要在恰当的位置，**引入 `useCodeGroups.js` 并执行 `useCodeGroups` 方法**，监听代码组 `tab` 点击实现切换逻辑。
 
 ```javascript
-import { useCodeGroups } from 'remarkBlockContainers/useCodeGroups'
+import { useCodeGroups } from 'remark-block-containers/useCodeGroups'
 useCodeGroups()
+```
+
+**默认所有容器都是没有样式的**，因此你可以自行设置容器样式或使用**预设样式**：
+
+```javascript
+// 引入预设样式表
+import 'remark-block-containers/css'
 ```
 
 ### ❗ 注意事项
