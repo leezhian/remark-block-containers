@@ -1,53 +1,57 @@
 # remark-block-containers
 
+<div align="center">
+
 [![Version](https://img.shields.io/npm/v/remark-block-containers?style=flat&colorA=000000&colorB=000000)](https://www.npmjs.com/package/remark-block-containers)
 [![Downloads](https://img.shields.io/npm/dt/remark-block-containers.svg?style=flat&colorA=000000&colorB=000000)](https://www.npmjs.com/package/remark-block-containers)
 [![Build Size](https://img.shields.io/bundlephobia/minzip/remark-block-containers?label=bundle%20size&style=flat&colorA=000000&colorB=000000)](https://bundlephobia.com/result?p=remark-block-containers)
 
+English · [中文](./README-zh_CN.md)
 
-这是一个 remark 插件，用于创建自定义容器，允许添加标题、id或样式类。
+This is a remark plugin for creating custom containers that allow the addition of titles, IDs, or style classes.
+</div>
 
-## ❓什么时候应该使用？
+## ❓When to use?
 
-如果您想要在 markdown 中添加自定义容器，例如生成警告、详情、危险、提示框等。
+If you want to add custom containers in Markdown, such as generating warning, details, danger, or tip boxes.
 
-- 允许自定义标签类型
-- 允许添加id或者样式类
-- 允许自定义标签标题
-- 已内置 `info`、`tip`、`warning`、`danger`、`details`、`code-group` 便捷写法
+- Allows customization of tag types
+- Allows adding IDs or style classes
+- Allows customization of tag titles
+- Built-in shortcuts for info, tip, warning, danger, details, code-group, etc.
 
-## 📦 安装
+## 📦 Installation
 
-该软件包仅适用于 ESM。建议 Nodejs 版本 14.14+
+This package only works with ESM. Node.js version 14.14+
 
 ```bash
 npm install remark-block-containers
 ```
-或者
+or
 ```bash
 yarn add remark-block-containers
 ```
-或者
+or
 ```bash
 pnpm add remark-block-containers
 ```
 
-## 📄 用法
+## 📄 Usage
 
 `::: [type][{id|class}] [title]`
 
-假设有如下 markdown 文件，`example.md` 它包含一个灵活的容器，类型为 tip。
-注意：每个容器必须以三个冒号开始和结束；并且*两个相邻的容器中间必须有空行*。
+Suppose you have the following Markdown file, `example.md`, which contains a flexible container of type "tip". 
+Note: Each container must start and end with three colons, and *there must be a blank line between two adjacent containers*.
 
 ```markdown
-<!-- 必须需要一空行 -->
+<!-- Must have a blank line -->
 ::: tip 提示
 这是一条提示。
 :::
-<!-- 必须需要一空行 -->
+<!-- Must have a blank line -->
 ```
 
-并且有一个 `example.js` 文件包含：
+And you have an `example.js` file that includes:
 
 ```javascript
 import { unified } from 'unified'
@@ -69,7 +73,7 @@ const file = await unified()
 console.log(String(file))
 ```
 
-运行后 `node example.js` 会得到👇
+Running `node example.js` will produce the following output👇
 
 ```html
 <div class="block-default tip">
@@ -78,15 +82,15 @@ console.log(String(file))
 </div>
 ```
 
-> `info`、`tip`、`warning`、`danger`、`details`、`code-group` 等 type 都是内置便捷写法，等价于 `::: p{.tip}`。
+> `info`、`tip`、`warning`、`danger`、`details`、`code-group` are built-in shortcuts and are equivalent to `::: p{.tip}`。
 >
-> 若想要添加**自定义id**，则 `::: p{#id}` 即可。
+> If you want to add a **custom ID**, use `::: p{#id}`.
 >
-> 因此你想要自定义任何容器也是允许的，**前提 `type` 是合法标签类型**，如 `div`、`main`、`span` 等。
+> Therefore, it is allowed to customize any container as long as the `type` is a valid tag type, such as `div`, `main`, `span`, etc.
 
-### 可选样式
+### Optional Styles
 
-**默认所有容器都是没有样式的**，因此你可以**自行设置容器样式**或使用**预设样式**：
+**By default, all containers have no style**, so **you can set container styles yourself** or **use preset styles**:
 
 ```javascript
 // 引入预设样式表
@@ -95,38 +99,38 @@ import 'remark-block-containers/css'
 
 ![预设样式预览](./preview.png)
 
-### 代码组
+### Code Group
 
-**使用 `code-group` 时**，单一引用该插件的是不行的，无法实现切换逻辑，因此需要在恰当的位置，**引入 `useCodeGroups.js` 并执行 `useCodeGroups` 方法**，监听代码组 `tab` 点击实现切换逻辑。
+When using `code-group`, simply referencing this plugin is not enough to implement the switching logic. It requires importing `useCodeGroups.js` at the appropriate location and executing the `useCodeGroups` method to listen for code group `tab` clicks and implement the switching logic.
 
 ```javascript
 import { useCodeGroups } from 'remark-block-containers/useCodeGroups'
 useCodeGroups()
 ```
 
-### ❗ 注意事项
+### ❗ Important Notes
 
-目前存在一个问题，当容器只有没有任何内容时，会被误解析为非容器，因此尽量避免这种做法。
+Currently, there is an issue where a container with no content is mistakenly interpreted as a non-container, so it is best to avoid this practice.
 
 ```markdown
 :::
 :::
 ```
 
-## ⚙️ 选项
+## ⚙️ Options
 
-所有选项都是可选的。
+All options are optional.
 
 ```javascript
 use(remarkBlockContainers, {
-  containerClass: 'block-default', // 容器默认样式类
-  containerType: 'div', // 容器标签类型，只影响便捷写法。
-  titleType: 'p', // title 标签类型
-  titleClass: 'block-title', // title 默认样式类
+  containerClass: 'block-default', // Default container style class
+  containerType: 'div', // Container tag type, only affects shortcuts.
+  titleType: 'p', // Title tag type
+  titleClass: 'block-title', // Default title style class
 })
 ```
 
-也可直接使用默认选项
+You can also use the default options directly
 
 ```javascript
 use(remarkBlockContainers)
