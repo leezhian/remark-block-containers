@@ -2,10 +2,21 @@
   --block-font-size: 14px;
   --block-text-color: #333;
   --block-info-bg: rgb(142 150 170 / 14%);
+  --block-info-code-color: #3451b2;
+  --block-info-code-bg: rgb(142 150 170 / 14%);
   --block-tip-bg: rgb(100 108 255 / 14%);
+  --block-tip-code-color: #3451b2;
+  --block-tip-code-bg: rgb(100 108 255 / 14%);
   --block-warning-bg: rgb(234 179 8 / 14%);
+  --block-warning-code-color: #915930;
+  --block-warning-code-bg: rgb(234 179 8 / 14%);
   --block-danger-bg: rgb(244 63 94 / 14%);
+  --block-danger-code-color: #b8272c;
+  --block-danger-code-bg: rgb(244 63 94 / 14%);
   --block-details-bg: rgb(142 150 170 / 14%);
+  --block-details-code-color: #3451b2;
+  --block-details-code-bg: rgb(142 150 170 / 14%);
+
   --block-code-bg: rgb(36 41 46);
   --block-code-tab-bg: rgb(36 41 46);
   --block-code-tab-text-color: rgb(235 235 245 / 60%);
@@ -25,23 +36,44 @@
   }
 
   .block-title {
+    margin: 0;
     font-weight: 600;
   }
 
   &.info {
     background-color: var(--block-info-bg);
+
+    code {
+      color: var(--block-info-code-color);
+      background-color: var(--block-info-code-bg);
+    }
   }
 
   &.tip {
     background-color: var(--block-tip-bg);
+
+    code {
+      color: var(--block-tip-code-color);
+      background-color: var(--block-tip-code-bg);
+    }
   }
 
   &.warning {
     background-color: var(--block-warning-bg);
+
+    code {
+      color: var(--block-warning-code-color);
+      background-color: var(--block-warning-code-bg);
+    }
   }
 
   &.danger {
     background-color: var(--block-danger-bg);
+
+    code {
+      color: var(--block-danger-code-color);
+      background-color: var(--block-danger-code-bg);
+    }
   }
 
   &.details {
@@ -49,8 +81,14 @@
 
     summary {
       margin-bottom: 8px;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
+      user-select: none;
+    }
+
+    code {
+      color: var(--block-details-code-color);
+      background-color: var(--block-details-code-bg);
     }
   }
 }

@@ -76,24 +76,28 @@ console.log(String(file))
 </div>
 ```
 
-> `info`、`tip`、`warning`、`danger`、`details`、`code-group` 等 type 都是内置便捷写法，等价于 `::: div{.tip}`。
+> `info`、`tip`、`warning`、`danger`、`details`、`code-group` 等 type 都是内置便捷写法，等价于 `::: p{.tip}`。
 >
-> 若想要添加**自定义id**，则 `::: div{#id}` 即可。
+> 若想要添加**自定义id**，则 `::: p{#id}` 即可。
 >
 > 因此你想要自定义任何容器也是允许的，**前提 `type` 是合法标签类型**，如 `div`、`main`、`span` 等。
+
+### 可选样式
+
+**默认所有容器都是没有样式的**，因此你可以**自行设置容器样式**或使用**预设样式**：
+
+```javascript
+// 引入预设样式表
+import 'remark-block-containers/css'
+```
+
+### 代码组
 
 **使用 `code-group` 时**，单一引用该插件的是不行的，无法实现切换逻辑，因此需要在恰当的位置，**引入 `useCodeGroups.js` 并执行 `useCodeGroups` 方法**，监听代码组 `tab` 点击实现切换逻辑。
 
 ```javascript
 import { useCodeGroups } from 'remark-block-containers/useCodeGroups'
 useCodeGroups()
-```
-
-**默认所有容器都是没有样式的**，因此你可以自行设置容器样式或使用**预设样式**：
-
-```javascript
-// 引入预设样式表
-import 'remark-block-containers/css'
 ```
 
 ### ❗ 注意事项
@@ -114,7 +118,7 @@ import 'remark-block-containers/css'
 use(remarkBlockContainers, {
   containerClass: 'block-default', // 容器默认样式类
   containerType: 'div', // 容器标签类型，只影响便捷写法。
-  titleType: 'div', // title 标签类型
+  titleType: 'p', // title 标签类型
   titleClass: 'block-title', // title 默认样式类
 })
 ```

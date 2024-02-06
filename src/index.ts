@@ -29,7 +29,7 @@ export interface NodeData extends Data {
 const settings: BlockContainersOptions = {
   containerClass: 'block-default',
   containerType: 'div',
-  titleType: 'div',
+  titleType: 'p',
   titleClass: 'block-title',
 }
 
