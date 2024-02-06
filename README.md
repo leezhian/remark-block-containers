@@ -40,9 +40,11 @@ pnpm add remark-block-containers
 注意：每个容器必须以三个冒号开始和结束；并且*两个相邻的容器中间必须有空行*。
 
 ```markdown
+<!-- 必须需要一空行 -->
 ::: tip 提示
 这是一条提示。
 :::
+<!-- 必须需要一空行 -->
 ```
 
 并且有一个 `example.js` 文件包含：
@@ -71,7 +73,7 @@ console.log(String(file))
 
 ```html
 <div class="block-default tip">
-  <div class="block-title">提示</div>
+  <p class="block-title">提示</p>
   <p>这是一条提示。</p>
 </div>
 ```
@@ -91,6 +93,8 @@ console.log(String(file))
 import 'remark-block-containers/css'
 ```
 
+![预设样式预览](./preview.png)
+
 ### 代码组
 
 **使用 `code-group` 时**，单一引用该插件的是不行的，无法实现切换逻辑，因此需要在恰当的位置，**引入 `useCodeGroups.js` 并执行 `useCodeGroups` 方法**，监听代码组 `tab` 点击实现切换逻辑。
@@ -102,11 +106,10 @@ useCodeGroups()
 
 ### ❗ 注意事项
 
-目前存在一个问题，当容器只有空行时，会被误解析为非容器，因此尽量避免这种做法。
+目前存在一个问题，当容器只有没有任何内容时，会被误解析为非容器，因此尽量避免这种做法。
 
 ```markdown
 :::
-
 :::
 ```
 

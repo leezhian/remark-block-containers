@@ -36,9 +36,9 @@ const settings: BlockContainersOptions = {
 const TAGS_ALIAS = ['info', 'tip', 'warning', 'danger', 'details', 'code-group'] // 标签别名
 
 export const PARAM_REG = /([A-Za-z0-9_-]+)(\{([\.|#])(\w+)\})?/iu
-export const CONTAINER_START = /^:{3}\s*([A-Za-z0-9_-]+)?(\{([\.|#])(\w+)\})?(\s.+)?/i
+export const CONTAINER_START = /^:{3} *([A-Za-z0-9_-]+)?(\{([\.|#])(\w+)\})?( .+)?/i
 export const CONTAINER_END = /\s*\n*?:{3}$/
-export const BAD_CONTAINER_REG = /^(:{3})\s*\n+\s*(:{3})\s*.*/
+export const BAD_CONTAINER_REG = /^:{3}\s+:{3}\s*.*/
 
 /**
  * @description: 创建标题元素
@@ -185,14 +185,11 @@ function checkIsContainer(node: Paragraph): boolean {
 
   const value = firstChildren.value
   if (BAD_CONTAINER_REG.test(value)) return false
+  return CONTAINER_START.test(value)
+  // if (!CONTAINER_START.test(value)) return false
+  // const hasClosing = checkIsCompleteContainerNode(node)
 
-  const hasClosing = checkIsCompleteContainerStr(node)
-
-  if( hasClosing && CONTAINER_START.test(value)) {
-    return value.includes('\n')
-  } else {
-    return hasClosing || CONTAINER_START.test(value)
-  }
+  // return (hasClosing && value.includes('\n')) || !hasClosing
 }
 
 /**
@@ -200,10 +197,17 @@ function checkIsContainer(node: Paragraph): boolean {
  * @param {Paragraph} node
  * @return {boolean}
  */
-function checkIsCompleteContainerStr(node: Paragraph) {
+function checkIsCompleteContainerNode(node: Paragraph) {
   const firstChildren = node.children[0] as Text
-  const clolonCount = firstChildren.value.match(/:/g)?.length ?? 0
-  return CONTAINER_END.test(firstChildren.value) && clolonCount >= 6
+
+  if(node.children.length > 1) {
+    const lastChildren = node.children[node.children.length - 1] as Text
+    return CONTAINER_START.test(firstChildren.value) && CONTAINER_END.test(lastChildren.value)
+  } else {
+    const firstChildren = node.children[0] as Text
+    const semicolonCount = firstChildren.value.match(/:/g)?.length ?? 0
+    return CONTAINER_START.test(firstChildren.value) && CONTAINER_END.test(firstChildren.value) && semicolonCount >= 6
+  }
 }
 
 /**
@@ -291,8 +295,7 @@ function analyzeChild(node: Paragraph): Params {
   const textElement = node.children[0] as Text
 
   const mainContent = textElement.value
-    .replace(/^(:{3})/, '')
-    .replace(/(:{3})$/, '') // 移除前后 :::
+    .replace(/^(:{3}) */, '') // 移除前后 :::
   if (mainContent.includes('\n')) {
     // 表示换行符前是参数，如 ::: xxx\nxxx\n:::
     const firstLinefeedIndex = mainContent.indexOf('\n')
@@ -307,35 +310,41 @@ function analyzeChild(node: Paragraph): Params {
 }
 
 /**
- * @description: 解析结束node
+ * @description: 替换结束分号
  * @param {Paragraph} node
- * @return {boolean}
+ * @return {void}
  */
-function analyzeClosingNode(node: Paragraph): boolean {
+function replaceCloseSemicolon(node: Paragraph) {
   const { children } = node
 
   const lastChild = children[children.length - 1]
   if (lastChild.type === 'text') {
-    if (children.length === 1 && lastChild.value === ':::') {
-      return true
-    }
-
     lastChild.value = lastChild.value.replace(CONTAINER_END, '')
-
     if (!lastChild.value) {
       node.children.pop()
     }
   }
+}
 
-  return !children.length
+/**
+ * @description: 解析结束node, true 表示还有其他有用的子节点，false 表示无需加入这个结束节点
+ * @param {Paragraph} node
+ * @return {boolean}
+ */
+function analyzeClosingNode(node: Paragraph): boolean {
+  replaceCloseSemicolon(node)
+  return !!node.children.length
 }
 
 const visitor: Visitor<Paragraph, Parent> = (node, index = 0, parent): VisitorResult => {
   if (!parent) return
   if (!checkIsContainer(node)) return
-  const completeFlag = checkIsCompleteContainerStr(node)
+  const completeFlag = checkIsCompleteContainerNode(node)
   const { type, title, props, alias } = analyzeChild(node)
-
+  if (completeFlag) {
+    replaceCloseSemicolon(node)
+  }
+  
   const containerChildren: RootContent[] = [node]
 
   if (alias !== 'code-group' && title) {
@@ -365,7 +374,7 @@ const visitor: Visitor<Paragraph, Parent> = (node, index = 0, parent): VisitorRe
     }
     containerChildren.push(...originContainerChildren)
 
-    if (!closeFlag) {
+    if (closeFlag) {
       containerChildren.push(closingNode)
     }
 
