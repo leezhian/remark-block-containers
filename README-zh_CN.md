@@ -1,6 +1,6 @@
-# remark-block-containers
-
 <div align="center">
+
+<h1>remark-block-containers</h1>
 
 [![Version](https://img.shields.io/npm/v/remark-block-containers?style=flat&colorA=000000&colorB=000000)](https://www.npmjs.com/package/remark-block-containers)
 [![Downloads](https://img.shields.io/npm/dt/remark-block-containers.svg?style=flat&colorA=000000&colorB=000000)](https://www.npmjs.com/package/remark-block-containers)

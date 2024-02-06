@@ -1,6 +1,6 @@
 {
   "name": "remark-block-containers",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "remark 插件-用于创建自定义容器，允许添加标题、id或样式类",
   "type": "module",
   "main": "./dist/index.js",
