@@ -1,6 +1,6 @@
 import { visit, type Visitor, type VisitorResult } from 'unist-util-visit'
 import { findAfter } from 'unist-util-find-after'
-import { findAllBetween } from 'unist-util-find-between-all'
+import { findBetween } from 'unist-util-find-between'
 import { nanoid } from 'nanoid'
 import type { Transformer, Plugin } from 'unified'
 import type { Paragraph, Root, Text, Parent, Data, RootContent } from 'mdast'
@@ -364,7 +364,7 @@ const visitor: Visitor<Paragraph, Parent> = (node, index = 0, parent): VisitorRe
     }
 
     const closeFlag = analyzeClosingNode(closingNode)
-    let originContainerChildren: RootContent[] = findAllBetween(parent as any, node as any, closingNode as any) as RootContent[]
+    let originContainerChildren: RootContent[] = findBetween(parent, node, closingNode)
 
     if (alias === 'code-group') {
       // 代码组需要生成 tabs

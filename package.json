@@ -54,7 +54,7 @@
     "nanoid": "^5.0.1",
     "sass": "^1.68.0",
     "unist-util-find-after": "^5.0.0",
-    "unist-util-find-between-all": "^1.0.4",
+    "unist-util-find-between": "^1.2.3",
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
