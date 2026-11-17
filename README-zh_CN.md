@@ -22,7 +22,7 @@
 
 ## 📦 安装
 
-该软件包仅适用于 ESM。建议 Nodejs 版本 14.14+
+该软件包仅适用于 ESM。要求 Node.js 版本 18+
 
 ```bash
 npm install remark-block-containers

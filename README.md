@@ -22,7 +22,7 @@ If you want to add custom containers in Markdown, such as generating warning, de
 
 ## 📦 Installation
 
-This package only works with ESM. Node.js version 14.14+
+This package only works with ESM. Node.js version 18+
 
 ```bash
 npm install remark-block-containers
