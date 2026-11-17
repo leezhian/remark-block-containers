@@ -7,7 +7,7 @@ export const mockMd = [
     :::
     :::
     `,
-    output: `"<p>::::::</p>"`
+    output: '<p>::::::</p>'
   },
   {
     input: dedent
@@ -16,7 +16,7 @@ export const mockMd = [
 
     :::
     `,
-    output: `"<div class="block-default"></div>"`
+    output: '<div class="block-default"></div>'
   },
   {
     input: dedent
@@ -25,7 +25,7 @@ export const mockMd = [
     content
     :::
     `,
-    output: `"<div class="block-default"><p>content</p></div>"`
+    output: '<div class="block-default"><p>content</p></div>'
   },
   {
     input: dedent
@@ -34,7 +34,7 @@ export const mockMd = [
     content
     :::
     `,
-    output: `"<div class="block-default info"><p>content</p></div>"`
+    output: '<div class="block-default info"><p>content</p></div>'
   },
   {
     input: dedent
@@ -43,7 +43,7 @@ export const mockMd = [
     content
     :::
     `,
-    output: `"<div class="block-default tip"><p>content</p></div>"`
+    output: '<div class="block-default tip"><p>content</p></div>'
   },
   {
     input: dedent
@@ -52,7 +52,7 @@ export const mockMd = [
     content
     :::
     `,
-    output: `"<div class="block-default warning"><p>content</p></div>"`
+    output: '<div class="block-default warning"><p>content</p></div>'
   },
   {
     input: dedent
@@ -61,7 +61,7 @@ export const mockMd = [
     content
     :::
     `,
-    output: `"<div class="block-default danger"><p>content</p></div>"`
+    output: '<div class="block-default danger"><p>content</p></div>'
   },
   {
     input: dedent
@@ -70,7 +70,7 @@ export const mockMd = [
     content
     :::
     `,
-    output: `"<details class="block-default details"><p>content</p></details>"`
+    output: '<details class="block-default details"><p>content</p></details>'
   },
   {
     input: dedent
@@ -79,7 +79,7 @@ export const mockMd = [
     content
     :::
     `,
-    output: `"<details class="block-default details"><summary class="block-title">详情</summary><p>content</p></details>"`
+    output: '<details class="block-default details"><summary class="block-title">详情</summary><p>content</p></details>'
   },
   {
     input: dedent
@@ -88,7 +88,7 @@ export const mockMd = [
     content
     :::
     `,
-    output: `"<div class="block-default tip"><p>content</p></div>"`
+    output: '<div class="block-default tip"><p>content</p></div>'
   },
   {
     input: dedent
@@ -97,7 +97,7 @@ export const mockMd = [
     content
     :::
     `,
-    output: `"<div class="block-default tip wrap"><p>content</p></div>"`
+    output: '<div class="block-default tip wrap"><p>content</p></div>'
   },
   {
     input: dedent
@@ -106,7 +106,7 @@ export const mockMd = [
     content
     :::
     `,
-    output: `"<div class="block-default tip" id="box"><p>content</p></div>"`
+    output: '<div class="block-default tip" id="box"><p>content</p></div>'
   },
   {
     input: dedent
@@ -115,7 +115,7 @@ export const mockMd = [
     content
     :::
     `,
-    output: `"<div class="block-default tip"><p class="block-title">提示</p><p>content</p></div>"`
+    output: '<div class="block-default tip"><p class="block-title">提示</p><p>content</p></div>'
   },
   {
     input: dedent
@@ -124,7 +124,7 @@ export const mockMd = [
     content
     :::
     `,
-    output: `"<div class="block-default tip wrap"><p class="block-title">提示</p><p>content</p></div>"`
+    output: '<div class="block-default tip wrap"><p class="block-title">提示</p><p>content</p></div>'
   },
   {
     input: dedent
@@ -133,7 +133,7 @@ export const mockMd = [
     content
     :::
     `,
-    output: `"<main class="block-default"><p>content</p></main>"`
+    output: '<main class="block-default"><p>content</p></main>'
   },
   {
     input: dedent
@@ -142,7 +142,7 @@ export const mockMd = [
     content
     :::
     `,
-    output: `"<main class="block-default wrap"><p>content</p></main>"`
+    output: '<main class="block-default wrap"><p>content</p></main>'
   },
   {
     input: dedent
@@ -151,7 +151,7 @@ export const mockMd = [
     content
     :::
     `,
-    output: `"<main class="block-default wrap"><p class="block-title">标题</p><p>content</p></main>"`
+    output: '<main class="block-default wrap"><p class="block-title">标题</p><p>content</p></main>'
   },
   {
     input: dedent
@@ -162,7 +162,7 @@ export const mockMd = [
 
     :::
     `,
-    output: `"<div class="block-default tip"><p>content</p></div>"`
+    output: '<div class="block-default tip"><p>content</p></div>'
   },
   {
     input: dedent
@@ -172,7 +172,7 @@ export const mockMd = [
 
     :::
     `,
-    output: `"<div class="block-default tip"><p>content</p></div>"`
+    output: '<div class="block-default tip"><p>content</p></div>'
   },
   {
     input: dedent
@@ -181,7 +181,7 @@ export const mockMd = [
     content \`npm\`
     :::
     `,
-    output: `"<div class="block-default tip"><p>content <code>npm</code></p></div>"`
+    output: '<div class="block-default tip"><p>content <code>npm</code></p></div>'
   }
 ]
 
@@ -193,7 +193,7 @@ export const mockMdByOptions = [
     content
     :::
     `,
-    output: `"<section class="custom-container tip"><p>content</p></section>"`
+    output: '<section class="custom-container tip"><p>content</p></section>'
   },
   {
     input: dedent
@@ -202,7 +202,7 @@ export const mockMdByOptions = [
     content
     :::
     `,
-    output: `"<section class="custom-container tip"><div class="custom-title">提示</div><p>content</p></section>"`
+    output: '<section class="custom-container tip"><div class="custom-title">提示</div><p>content</p></section>'
   },
   {
     input: dedent
@@ -211,6 +211,6 @@ export const mockMdByOptions = [
     content
     :::
     `,
-    output: `"<section class="custom-container tip wrap"><div class="custom-title">提示</div><p>content</p></section>"`
+    output: '<section class="custom-container tip wrap"><div class="custom-title">提示</div><p>content</p></section>'
   },
 ]

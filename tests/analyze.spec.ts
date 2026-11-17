@@ -1,8 +1,9 @@
+import { describe, test, expect } from 'vitest'
 import { unified } from 'unified'
 import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
 import rehypeStringify from 'rehype-stringify'
-import remarkBlockContainers from '../src'
+import remarkBlockContainers from '../src/index'
 import { mockMd, mockMdByOptions } from './test-case.mock'
 
 const defaultCompiler = unified()
@@ -30,7 +31,7 @@ const process = async (compiler: any, contents: string): Promise<string> => {
 describe('analyze', () => {
   mockMd.forEach(item => {
     test(`test input ${item.input}`, async () => {
-      expect(await process(defaultCompiler, item.input)).toMatchInlineSnapshot(item.output,);
+      expect(await process(defaultCompiler, item.input)).toBe(item.output)
     })
   })
 })
@@ -38,7 +39,7 @@ describe('analyze', () => {
 describe('test options', () => {
   mockMdByOptions.forEach(item => {
       test(`test options input ${item.input}`, async () => {
-      expect(await process(optionCompiler, item.input)).toMatchInlineSnapshot(item.output,);
+      expect(await process(optionCompiler, item.input)).toBe(item.output)
     })
   })
 })

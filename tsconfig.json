@@ -2,15 +2,15 @@
   "compilerOptions": {
     "target": "ES2020",
     "lib": ["ES2020", "DOM"],
-    "module": "ESNext",
-    "moduleResolution": "node",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
     "esModuleInterop": true,
     "strict": true,
     "declaration": true,
+    "rootDir": "src",
     "skipLibCheck": true,
     "removeComments": true,
-    "outDir": "dist",
-    "types": ["jest"]
+    "outDir": "dist"
   },
   "include": ["src/**/*.ts"]
 }
